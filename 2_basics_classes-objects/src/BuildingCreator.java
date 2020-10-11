@@ -1,3 +1,4 @@
+import building.Address;
 import building.Building;
 import building.Floor;
 import building.Room;
@@ -5,19 +6,18 @@ import building.Room;
 public class BuildingCreator {
 
 	public static void main(String[] args) {
-		Room room = new Room();
-		room.number = 10;
+		Room room = new Room(10);
 
 		Floor floor = new Floor();
 		floor.addRoom(room);
 
 		Building building = new Building();
 		building.addFloor(floor);
+		building.setAddress(new Address("turism", "cluj",7));
+		room.setNumber(300);
 		
-		room.number = 200;
+		System.out.println(building.getFloors().get(0).rooms[0].getNumber());
 		
-		System.out.println(building.floors[0].rooms[0].number);
-		
-		building.describeYourself();
+		System.out.println(building);
 	}
 }

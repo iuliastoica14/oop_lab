@@ -1,16 +1,32 @@
 package building;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Building {
 
     private int floorsIndex = 0;
-    public Address address = new Address();
-    public Floor[] floors = new Floor[10];
+    private Address address;
+    private List<Floor> floors = new ArrayList<>();
 
     public void addFloor(Floor floor) {
-        floors[floorsIndex++] = floor;
+        floors.add(floor);
     }
 
-    public String describeYourself() {
-        return "";
+
+    private String describeYourself() {
+        return "Adresa este: "+ address+ "\nNr Etaje: "+floors.size();
+    }
+
+    public String toString(){
+        return describeYourself();
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public List<Floor> getFloors() {
+        return floors;
     }
 }

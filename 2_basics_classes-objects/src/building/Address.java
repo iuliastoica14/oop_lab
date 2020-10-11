@@ -1,7 +1,17 @@
 package building;
 
 public class Address {
-	public String street;
-	public String city;
-	public Integer number;
+	private String street;
+	private String city;
+	private Integer number;
+
+	public Address(String street, String city, Integer number){
+		this.street=street;
+		this.city=city;
+		this.number=number;
+	}
+
+	public String toString(){
+		return city+" "+street+" "+number;
+	}
 }
