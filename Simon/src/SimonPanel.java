@@ -4,14 +4,21 @@ import java.awt.image.ColorModel;
 import java.math.RoundingMode;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.Graphics;
 
-public class SimonPanel  extends JFrame implements ActionListener{
+public class SimonPanel  extends JFrame {
 
-    JButton red;
-    JButton green;
-    JButton blue;
-    JButton yellow;
+    private JButton red= new JButton();
+    private JButton green= new JButton();
+    private JButton blue= new JButton();
+    private JButton yellow= new JButton();
+
+    private JLabel score=new JLabel();
+    private JLabel level=new JLabel();
+    private JLabel t=new JLabel();
+
+    private JButton start = new JButton("START");
 
     SimonPanel() {
         JFrame frame = new JFrame ("Simon");
@@ -19,33 +26,44 @@ public class SimonPanel  extends JFrame implements ActionListener{
         frame.setSize(700, 710);
 
 
-        JPanel details=new JPanel();
-        JPanel detailsarr=new JPanel();
+        JPanel details=new JPanel(new GridLayout(1,2));
+        JPanel detailsarr=new JPanel(new BorderLayout());
         JPanel colors = new JPanel();
         JPanel gamebuttons = new JPanel();
 
         JLabel txtscore=new JLabel("Score : ");
         txtscore.setForeground(Color.white);
-        JLabel score=new JLabel();
         score.setForeground(Color.red);
+        level.setForeground(Color.red);
+
         JLabel txtlevel=new JLabel("Level : ");
         txtlevel.setForeground(Color.white);
-        JLabel level=new JLabel();
-        level.setForeground(Color.red);
-        JLabel t=new JLabel();
-        details.add(txtscore);
-        details.add(score);
-        details.add(txtlevel);
-        details.add(level);
-        details.add(t);
-        details.setLayout(new GridLayout(2,2));
+
+        JPanel scorePanel=new JPanel(new FlowLayout());
+        scorePanel.add(txtscore);
+        scorePanel.add(score);
+        scorePanel.setBackground(Color.black);
+
+        JPanel lvlPanel=new JPanel(new FlowLayout());
+        lvlPanel.add(txtlevel);
+        lvlPanel.add(level);
+        lvlPanel.setBackground(Color.black);
+
+        JPanel help=new JPanel();
+        help.add(t);
+        help.setBackground(Color.black);
+        help.setBorder(new EmptyBorder(30,0,0,0));
+
+        details.add(scorePanel);
+        details.add(lvlPanel);
         details.setBackground(Color.black);
-        detailsarr.add(details,BorderLayout.CENTER);
+        detailsarr.add(details,BorderLayout.NORTH);
+        detailsarr.add(help,BorderLayout.SOUTH);
         detailsarr.setBackground(Color.black);
-        detailsarr.setBorder(BorderFactory.createLineBorder(Color.black,30));
+        detailsarr.setBorder(new EmptyBorder(30,30,10,30));
 
 
-        JButton green = new JButton();
+        green = new JButton();
         green.setBackground(Color.GREEN.darker().darker());
         green.addMouseListener(new MouseAdapter() {
             @Override
@@ -60,10 +78,10 @@ public class SimonPanel  extends JFrame implements ActionListener{
                 green.setBackground(Color.GREEN.darker().darker());
             }
         });
-        green.addActionListener(this);
+
         green.setBorder(BorderFactory.createLineBorder(Color.black,30));
 
-        JButton red = new JButton();
+        red = new JButton();
         red.setBackground(Color.red.darker().darker());
         red.addMouseListener(new MouseAdapter() {
             @Override
@@ -78,10 +96,10 @@ public class SimonPanel  extends JFrame implements ActionListener{
                 red.setBackground(Color.red.darker().darker());
             }
         });
-        red.addActionListener(this);
+
         red.setBorder(BorderFactory.createLineBorder(Color.black,30));
 
-        JButton yellow = new JButton();
+        yellow = new JButton();
         yellow.setBackground(Color.yellow.darker().darker());
         yellow.addMouseListener(new MouseAdapter() {
             @Override
@@ -96,10 +114,10 @@ public class SimonPanel  extends JFrame implements ActionListener{
                 yellow.setBackground(Color.yellow.darker().darker());
             }
         });
-        yellow.addActionListener(this);
+
         yellow.setBorder(BorderFactory.createLineBorder(Color.black,30) );
 
-        JButton blue = new JButton();
+        blue = new JButton();
         blue.setBackground(Color.blue.darker().darker());
         blue.addMouseListener(new MouseAdapter() {
             @Override
@@ -114,7 +132,7 @@ public class SimonPanel  extends JFrame implements ActionListener{
                 blue.setBackground(Color.blue.darker().darker());
             }
         });
-        blue.addActionListener(this);
+
         blue.setBorder(BorderFactory.createLineBorder(Color.black,30));
 
         colors.add(green);
@@ -126,8 +144,6 @@ public class SimonPanel  extends JFrame implements ActionListener{
         colors.setBorder(BorderFactory.createEmptyBorder(30,30,0,30));
 
 
-
-        JButton start = new JButton("START");
         start.setBackground(Color.black);
         start.setForeground(Color.MAGENTA);
         gamebuttons.add(start);
@@ -148,8 +164,46 @@ public class SimonPanel  extends JFrame implements ActionListener{
         frame.setVisible(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public JButton getBlue() {
+        return blue;
+    }
 
+    public JButton getGreen() {
+        return green;
+    }
+
+    public JButton getRed() {
+        return red;
+    }
+
+    public JButton getYellow() {
+        return yellow;
+    }
+
+    public void setLevel(int level) {
+        this.level.setText(String.valueOf(level));
+    }
+
+    public void setScore(int score) {
+        this.score.setText(String.valueOf(score));
+    }
+
+    public void setT(int count,String txt,int lvl) {
+        this.t.setText(count+txt+lvl);
+    }
+
+    public void sendError(String message) {
+        JOptionPane.showMessageDialog(this, message, "Game Over!", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void addColorListener(ActionListener actionListener) {
+        red.addActionListener(actionListener);
+        yellow.addActionListener(actionListener);
+        blue.addActionListener(actionListener);
+        green.addActionListener(actionListener);
+    }
+
+    public void addStartListener(ActionListener actionListener) {
+        start.addActionListener(actionListener);
     }
 }
