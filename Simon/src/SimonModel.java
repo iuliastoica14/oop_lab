@@ -20,17 +20,10 @@ public class SimonModel {
     }
 
 
-
-    public void nextSeq()
-    {
-            int nr = new Random().nextInt()%4;
-            if(nr < 0)
-                nr = nr *-1;
-            System.out.println(nr+1);
-            addColor(nr);
-    }
-
-
+    /***
+     * Adaugarea unei noi culori secventei jocului printr-un numar.
+     * @param nr
+     */
     private void addColor(int nr)
     {
         if(nr ==  0)
@@ -44,17 +37,26 @@ public class SimonModel {
 
     }
 
+    /***
+     * Generarea unui numar random intre 0 si 3 si adaugarea culorii respective in secventa .
+     */
     void play() {
 
             int nr = new Random().nextInt() % 4;
             if (nr < 0)
                 nr = nr * -1;
-            System.out.println(nr+1);
+            //System.out.println(nr+1);
             addColor(nr);
 
 
     }
 
+
+    /***
+     * Funtia de flash a butonul ce urmeaza in secventa.
+     * Pentru fiecare buton din secventa culoarea se face mai inchisa si normala.
+     * De 2 ori culoarea e inchisa pentru a distinge 2 culori identice consecutive.
+     */
     public void flash(){
         for(JButton button:sequenceColors)
         {
@@ -109,6 +111,11 @@ public class SimonModel {
         thread.start();
     }
 
+    /***
+     * Se compara butoanele apasate cu cele generate de joc.
+     * Daca s-au apasat toate butoanele se trece la nivelul urmator, adugandu-se o culoare noua.
+     * @param userInput -- butoanele pe care apasa user-ul
+     */
     public void checkUserInput(List<JButton> userInput)
     {
         if(compareUserInput(userInput))
@@ -157,7 +164,7 @@ public class SimonModel {
         sequenceColors.clear();
         sequenceLength=1;
         level=1;
-        nextSeq();
+        play();
         nextflashing();
     }
 

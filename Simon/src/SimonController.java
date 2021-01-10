@@ -20,8 +20,13 @@ public class SimonController{
 
     }
 
-
     class ColorListener implements ActionListener {
+        /***
+         * Prin running se verifica daca jocul se deruleaza. Cand running este 0, jocul trece la valorile initiale si
+         * este in stand-by pana ce se apasa butonul start.
+         * Se verifica daca butonul apasat este cel ce urmeaza in secventa si se actualizeaza panelul de scor,
+         * daca nu, running este 0.
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             if (running == 1) {
@@ -45,8 +50,12 @@ public class SimonController{
         }
     }
 
+
     class StartListener implements ActionListener{
 
+        /***
+         * Initializarea parametrilor jocului si pornirea acestuia.
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             simonModel.start();

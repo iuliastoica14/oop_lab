@@ -1,11 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.ColorModel;
-import java.math.RoundingMode;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-import java.awt.Graphics;
+
 
 public class SimonPanel  extends JFrame {
 
