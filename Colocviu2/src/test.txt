@@ -1,0 +1,4 @@
+Lapte, 4
+Ceva, 5.32
+Altceva, 10.69
+Lamaie, 100000
